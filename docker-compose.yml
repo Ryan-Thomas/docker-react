@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build: 
+      context: . # Where we want all the files from this project to be found
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules 
+      - .:/app # . represents the current folder OUTSIDE the container. /app represents the location INSIDE the container
+    command: ["npm", "run", "start"]
+    stdin_open: true
+  tests:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
+    stdin_open: true
