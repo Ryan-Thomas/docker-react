@@ -1,4 +1,4 @@
-FROM node:alpine as builder
+FROM node:alpine
 
 WORKDIR /app
 COPY package.json .
@@ -11,4 +11,4 @@ FROM nginx
 # Elastic beanstalk will use port 80 as the port that it will receive incoming traffic on
 # When running locally, this does nothing
 EXPOSE 80
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=0 /app/build /usr/share/nginx/html
